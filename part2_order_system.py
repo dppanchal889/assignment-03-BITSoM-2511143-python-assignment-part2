@@ -303,17 +303,17 @@ for item in cart:
 if found == False:
     print(update_item, "is not in cart")
 
-    print("Current Cart:")
+print("Current Cart:")
 if len(cart) == 0:
     print("Cart is empty")
 else:
     for item in cart:
-        print({"item": item_name, "quantity": quantity, "price": menu[item_name]["price"]})
-        
-print()
+         print({"Item:", item["item"], "Quantity:", item["quantity"], "Price:", item["price"]})
 
 print()
 print("___________________________________________________________")
+
+
 
 # Final Order Summary
 print("========== Order Summary ==========")
@@ -335,9 +335,9 @@ print("GST (5%): ₹" + format(gst, ".2f"))
 print("Total Payable: ₹" + format(total_payable, ".2f"))
 print("====================================")
 
-#creates an empty cart
-#adds items if they exist and are available
-#updates quantity if the item is already in the cart
+#starting with empty cart
+#checking item and adding to cart
+#updating quantity if item already exists
 #prints message for invalid item
 #prints message for unavailable item
 #removes item from cart
