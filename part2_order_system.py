@@ -27,9 +27,7 @@ categories = ["Starters", "Mains", "Desserts"]
 # print menu category wise
 for category in categories:
     print()
-    print("------------------------------")
-    print("\n        " + category + "        ")
-    print("-------------------------------")
+    print("===== " + category + " =====")
     print()
 
     for item in menu:
@@ -287,6 +285,33 @@ if len(cart) == 0:
 else:
     for item in cart:
         print(item)
+print()
+print("___________________________________________________________")
+
+# update quantity example
+update_item = "Paneer Tikka"
+new_quantity = 3
+found = False
+
+for item in cart:
+    if item["item"] == update_item:
+        item["quantity"] = new_quantity
+        found = True
+        print("Quantity updated for", update_item)
+        break
+
+if found == False:
+    print(update_item, "is not in cart")
+
+    print("Current Cart:")
+if len(cart) == 0:
+    print("Cart is empty")
+else:
+    for item in cart:
+        print({"item": item_name, "quantity": quantity, "price": menu[item_name]["price"]})
+        
+print()
+
 print()
 print("___________________________________________________________")
 
