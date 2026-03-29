@@ -310,8 +310,92 @@ print("GST (5%): ₹" + format(gst, ".2f"))
 print("Total Payable: ₹" + format(total_payable, ".2f"))
 print("====================================")
 
+#creates an empty cart
+#adds items if they exist and are available
+#updates quantity if the item is already in the cart
+#prints message for invalid item
+#prints message for unavailable item
+#removes item from cart
+#prints final order summary with subtotal, GST, and total payable
+
 print()
 print("--------------------------------------------------------------------------------------------------------------------------------")
 print()
+print()
+
+print("Task 3 — Inventory Tracker with Deep Copy")
+print()
+print()
+import copy
+
+inventory = {
+    "Paneer Tikka":   {"stock": 10, "reorder_level": 3},
+    "Chicken Wings":  {"stock":  8, "reorder_level": 2},
+    "Veg Soup":       {"stock": 15, "reorder_level": 5},
+    "Butter Chicken": {"stock": 12, "reorder_level": 4},
+    "Dal Tadka":      {"stock": 20, "reorder_level": 5},
+    "Veg Biryani":    {"stock":  6, "reorder_level": 3},
+    "Garlic Naan":    {"stock": 30, "reorder_level": 10},
+    "Gulab Jamun":    {"stock":  5, "reorder_level": 2},
+    "Rasgulla":       {"stock":  4, "reorder_level": 3},
+    "Ice Cream":      {"stock":  7, "reorder_level": 4},
+}
+
+cart = [
+    {"item": "Paneer Tikka", "quantity": 3, "price": 180.0}
+]
+
+inventory_backup = copy.deepcopy(inventory)
+
+inventory["Paneer Tikka"]["stock"] = 2
+
+print("Inventory after manual change:")
+print("Paneer Tikka stock:", inventory["Paneer Tikka"]["stock"])
+
+print("\nInventory backup:")
+print("Paneer Tikka stock:", inventory_backup["Paneer Tikka"]["stock"])
+
+inventory = copy.deepcopy(inventory_backup)
+
+print("\nInventory restored:")
+print("Paneer Tikka stock:", inventory["Paneer Tikka"]["stock"])
+
+for item in cart:
+    item_name = item["item"]
+    quantity = item["quantity"]
+
+    if item_name in inventory:
+        if inventory[item_name]["stock"] >= quantity:
+            inventory[item_name]["stock"] = inventory[item_name]["stock"] - quantity
+        else:
+            print("Warning:", item_name, "has less stock")
+            print("Only", inventory[item_name]["stock"], "unit(s) available")
+            inventory[item_name]["stock"] = 0
+
+print("\nReorder Alerts:")
+alert_found = False
+
+for item_name in inventory:
+    stock = inventory[item_name]["stock"]
+    reorder_level = inventory[item_name]["reorder_level"]
+
+    if stock <= reorder_level:
+        print("Reorder Alert:", item_name, "- Only", stock, "unit(s) left (reorder level:", reorder_level, ")")
+        alert_found = True
+
+if alert_found == False:
+    print("No reorder alerts")
+
+print("\nFinal Inventory:")
+print("---------------------------------------------------------")
+for item_name in inventory:
+    print(item_name, "- Stock:", inventory[item_name]["stock"], "Reorder Level:", inventory[item_name]["reorder_level"])
+
+print("\nInventory Backup:")
+print("---------------------------------------------------------")
+for item_name in inventory_backup:
+    print(item_name, "- Stock:", inventory_backup[item_name]["stock"], "Reorder Level:", inventory_backup[item_name]["reorder_level"])
+print()
+print("--------------------------------------------------------------------------------------------------------------------------------")
 print()
 print()
