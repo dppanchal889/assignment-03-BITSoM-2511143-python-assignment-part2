@@ -16,12 +16,12 @@ menu = {
     "Ice Cream":      {"category": "Desserts",  "price": 110.0, "available": False},
 }
 
-# printing heading
+
 print()
 print("RESTAURANT MENU")
 print("====================")
 
-# list of categories
+# categories list
 categories = ["Starters", "Mains", "Desserts"]
 
 # print menu category wise
@@ -35,7 +35,7 @@ for category in categories:
             price = menu[item]["price"]
             available = menu[item]["available"]
 
-            # checking availability
+           
             if available == True:
                 status = "Available"
             else:
@@ -44,7 +44,7 @@ for category in categories:
             print(item, "₹" + format(price, ".2f"), "[" + status + "]")
 
 print("_______________________________")
-# total number of items in menu
+# total items in menu
 total_items = len(menu)
 print("\nTotal number of items on the menu:", total_items)
 
@@ -67,20 +67,13 @@ for item in menu:
 
 print("Most expensive item:", max_item, "₹" + format(max_price, ".2f"))
 
-# print items under 150
+# items under 150
 print("Items priced under ₹150:")
 
 for item in menu:
     if menu[item]["price"] < 150:
         print(item, "₹" + format(menu[item]["price"], ".2f"))
 
-#First, I stored all menu items in a dictionary.
-#Then I made a list of categories: Starters, Mains, and Desserts.
-#I used nested loops to print items category-wise.
-#After that, I used len(menu) to count total items.
-#Then I counted available items using a loop and if condition.
-#To find the most expensive item, I compared prices one by one.
-#Finally, I printed all items whose price is less than 150.
 
 print("--------------------------------------------------------------------------------------------------------------------------------")
 
@@ -106,7 +99,7 @@ menu = {
 
 cart = []
 
-# Add "Paneer Tikka" x 2
+# Add Paneer Tikka x 2
 item_name = "Paneer Tikka"
 quantity = 2
 
@@ -138,7 +131,7 @@ else:
 print()
 
 print("___________________________________________________________")
-# Add "Gulab Jamun" x 1
+# Add Gulab Jamun x 1
 item_name = "Gulab Jamun"
 quantity = 1
 
@@ -170,7 +163,7 @@ else:
 print()
 print("___________________________________________________________")
 
-# Add "Paneer Tikka" x 1
+# Add Paneer Tikka x 1
 item_name = "Paneer Tikka"
 quantity = 1
 
@@ -202,7 +195,7 @@ else:
 print()
 print("___________________________________________________________")
 
-# Try to add "Mystery Burger"
+# Try to add Mystery Burger
 item_name = "Mystery Burger"
 quantity = 1
 
@@ -233,14 +226,15 @@ else:
         print(item)
 print()
 print("___________________________________________________________")
-# Try to add "Chicken Wings"
+# Try to add Chicken Wings
 item_name = "Chicken Wings"
 quantity = 1
 
 if item_name in menu:
     if menu[item_name]["available"] == True:
         found = False
-
+         
+ 
         for item in cart:
             if item["item"] == item_name:
                 item["quantity"] = item["quantity"] + quantity
@@ -265,7 +259,7 @@ else:
 print()
 print("___________________________________________________________")
 
-# Remove "Gulab Jamun"
+# Remove Gulab Jamun
 remove_item = "Gulab Jamun"
 found = False
 
@@ -308,7 +302,7 @@ if len(cart) == 0:
     print("Cart is empty")
 else:
     for item in cart:
-         print({"Item:", item["item"], "Quantity:", item["quantity"], "Price:", item["price"]})
+          print(item)
 
 print()
 print("___________________________________________________________")
@@ -335,13 +329,6 @@ print("GST (5%): ₹" + format(gst, ".2f"))
 print("Total Payable: ₹" + format(total_payable, ".2f"))
 print("====================================")
 
-#starting with empty cart
-#checking item and adding to cart
-#updating quantity if item already exists
-#prints message for invalid item
-#prints message for unavailable item
-#removes item from cart
-#prints final order summary with subtotal, GST, and total payable
 
 print()
 print("--------------------------------------------------------------------------------------------------------------------------------")
@@ -366,11 +353,15 @@ inventory = {
     "Ice Cream":      {"stock":  7, "reorder_level": 4},
 }
 
+# final cart from task 2
 cart = [
     {"item": "Paneer Tikka", "quantity": 3, "price": 180.0}
 ]
 
+# making backup using deep copy
 inventory_backup = copy.deepcopy(inventory)
+
+# manual change to show backup stays safe
 
 inventory["Paneer Tikka"]["stock"] = 2
 
@@ -382,9 +373,11 @@ print("Paneer Tikka stock:", inventory_backup["Paneer Tikka"]["stock"])
 
 inventory = copy.deepcopy(inventory_backup)
 
+# restoring inventory
 print("\nInventory restored:")
 print("Paneer Tikka stock:", inventory["Paneer Tikka"]["stock"])
 
+# deducting stock using final cart
 for item in cart:
     item_name = item["item"]
     quantity = item["quantity"]
@@ -397,6 +390,7 @@ for item in cart:
             print("Only", inventory[item_name]["stock"], "unit(s) available")
             inventory[item_name]["stock"] = 0
 
+# checking reorder alerts
 print("\nReorder Alerts:")
 alert_found = False
 
@@ -424,6 +418,8 @@ print()
 print("--------------------------------------------------------------------------------------------------------------------------------")
 print()
 print()
+
+#Task 4
 print ("Task 4 — Daily Sales Log Analysis")
 print()
 
@@ -489,7 +485,7 @@ for item in item_count:
 
 print("Most ordered item:", most_ordered_item, "-", max_count, "times")
 
-# add new day
+# adding  new day
 sales_log["2025-01-05"] = [
     {"order_id": 11, "items": ["Butter Chicken", "Gulab Jamun", "Garlic Naan"], "total": 490.0},
     {"order_id": 12, "items": ["Paneer Tikka", "Rasgulla"], "total": 260.0},
@@ -515,7 +511,7 @@ for date in sales_log:
 
 print("\nUpdated best-selling day:", best_day, "- ₹" + format(highest_revenue, ".2f"))
 
-# numbered list of all orders using enumerate
+# making one list of all orders
 all_orders = []
 
 
@@ -532,3 +528,5 @@ for number, entry in enumerate(all_orders, start=1):
     items_text = ", ".join(order["items"])
 
     print(str(number) + ". [" + date + "] Order #" + str(order["order_id"]) + " - ₹" + format(order["total"], ".2f") + " - Items: " + items_text)
+    print()
+print("--------------------------------------------------------------------------------------------------------------------------------")
